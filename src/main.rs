@@ -137,12 +137,14 @@ async fn main() {
         .with(tracing_subscriber::fmt::layer())
         .init();
 
-    let db_connection_str = std::env::var("DATABASE_URL")
-        .unwrap_or_else(|_| "postgres://postgres:postgres@localhost".to_string());
+    let db_connection_str = match std::env::var("DATABASE_URL") {
+        Ok(v) => v,
+        Err(_) => panic!("DATABASE_URL is not set"),
+    };
 
     let pool = PgPoolOptions::new()
-        .max_connections(5)
-        .acquire_timeout(Duration::from_secs(3))
+        .max_connections(10)
+        .acquire_timeout(Duration::from_secs(2))
         .connect(&db_connection_str)
         .await
         .expect("can't connect to database");
@@ -155,7 +157,7 @@ async fn main() {
 
     let listener = TcpListener::bind("127.0.0.1:8080").await.unwrap();
 
-    tracing::debug!("listening on {}", listener.local_addr().unwrap());
+    tracing::debug!("Listening on {}", listener.local_addr().unwrap());
 
     axum::serve(listener, app).await.unwrap();
 }

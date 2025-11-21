@@ -1,5 +1,5 @@
 GET http://localhost:8080/users
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjQsImV4cCI6MTc2MzgxMjk2NH0.1fbOFg_p3YpKwU9PJCi-4KtKjItOfHxWAbwBahnHQ6M
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTc2MzgyMDc1N30.7GwiRidDhsTegfhLKWXk3o1Pk_p98JxRPhIIdS_2BZk
 
 ###
 POST http://localhost:8080/users
@@ -16,6 +16,6 @@ POST http://localhost:8080/auth
 Content-Type: application/json
 
 {
-  "email": "raul@email.com",
+  "email": "eduardo@email.com",
   "password": "123"
 }
